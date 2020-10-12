@@ -28,7 +28,7 @@
     <!-- 映射信息 -->
     <mappers>
         <!-- 引入sql映射文件 -->
-        <mapper resource="sql.xml" />
-        <mapper resource="EmployeeMapper.xml"/>
+<!--        <mapper resource="EmployeeMapper.xml"/>-->
+        <mapper class="com.cebbank.liuxiaoming.mybatis.dao.EmployeeMapper"/>
     </mappers>
 </configuration>

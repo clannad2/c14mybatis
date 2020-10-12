@@ -57,7 +57,48 @@ public class Log4jTest {
     public void test3(){
         SqlSession sqlSession = factory.openSession();
         EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
-        List<Employee> employees = mapper.queryAll();
-        System.out.println(employees);
+//        List<Employee> employees = mapper.queryAll();
+//        System.out.println(employees);
+    }
+
+
+    @Test
+    public void test4(){
+        SqlSession sqlSession = factory.openSession(true);
+        EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+        Employee employee = new Employee();
+        employee.setLastName("赵本山");
+        employee.setEmail("wangwu@qq.com");
+        employee.setGender(1);
+        Integer rows = mapper.save(employee);
+        System.out.println(rows);
+        System.out.println(employee.getEmployId());
+//        sqlSession.commit();
+    }
+
+    @Test
+    public void test5(){
+        SqlSession sqlSession = factory.openSession(true);
+        EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+        Integer row = mapper.delEmpById(9);
+        System.out.println(row);
+    }
+
+    @Test
+    public void test6(){
+        SqlSession sqlSession = factory.openSession(true);
+        EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+
+        Employee employee = new Employee();
+        employee.setLastName("赵四");
+        employee.setEmail("wangwu@qq.com");
+        employee.setGender(1);
+        employee.setEmployId(2);
+//
+//        mapper.updateEmpById(employee);
+//        Employee employee = mapper.queryEmpByLastNameAndEmailParam("王五", "wangwu@qq.com");
+        Employee employee1 = mapper.queryEmpByPojo(employee);
+        System.out.println(employee1);
+
     }
 }
