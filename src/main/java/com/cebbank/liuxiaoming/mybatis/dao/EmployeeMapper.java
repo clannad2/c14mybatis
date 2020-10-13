@@ -1,7 +1,10 @@
 package com.cebbank.liuxiaoming.mybatis.dao;
 
 import com.cebbank.liuxiaoming.mybatis.entity.Employee;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.Map;
 
 public interface EmployeeMapper {
     /**
@@ -28,4 +31,6 @@ public interface EmployeeMapper {
     public Employee queryEmpByLastNameAndEmailParam(@Param("lastName") String lastName,@Param("email") String email);
     //使用Pojo类
     public Employee queryEmpByPojo(Employee emp);
+    @MapKey("employId")
+    public Map<Integer,Employee> queryEmpByMap();
 }

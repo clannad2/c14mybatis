@@ -1,4 +1,4 @@
-package com.cebbank.liuxiaoming.mybatis;
+package com.cebbank.liuxiaoming.mybatis.test;
 
 import com.cebbank.liuxiaoming.mybatis.dao.EmployeeMapper;
 import com.cebbank.liuxiaoming.mybatis.entity.Employee;
@@ -11,6 +11,8 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Log4jTest {
     private static SqlSessionFactory factory;
@@ -89,16 +91,25 @@ public class Log4jTest {
         SqlSession sqlSession = factory.openSession(true);
         EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
 
-        Employee employee = new Employee();
-        employee.setLastName("赵四");
-        employee.setEmail("wangwu@qq.com");
-        employee.setGender(1);
-        employee.setEmployId(2);
+//        Employee employee = new Employee();
+//        employee.setLastName("赵四");
+//        employee.setEmail("wangwu@qq.com");
+//        employee.setGender(1);
+//        employee.setEmployId(2);
 //
 //        mapper.updateEmpById(employee);
-//        Employee employee = mapper.queryEmpByLastNameAndEmailParam("王五", "wangwu@qq.com");
-        Employee employee1 = mapper.queryEmpByPojo(employee);
-        System.out.println(employee1);
+////        Employee employee = mapper.queryEmpByLastNameAndEmailParam("王五", "wangwu@qq.com");
+//        Employee employee1 = mapper.queryEmpByPojo(employee);
+//        System.out.println(employee1);
+        Map<Integer, Employee> maps = mapper.queryEmpByMap();
+        System.out.println(maps);
+        Set<Integer> keys = maps.keySet();
+        for (Integer key : keys) {
+            System.out.println(maps.get(key));
+        }
+//        Employee emp = mapper.queryEmpByLastName("张三");
+//        System.out.println(emp);
+
 
     }
 }

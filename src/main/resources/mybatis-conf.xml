@@ -3,8 +3,14 @@
 <configuration>
     <properties resource="db.properties"/>
     <settings>
-<!--        将下划线转换成驼峰命名-->
-        <setting name="mapUnderscoreToCamelCase" value="true"/>
+<!--&lt;!&ndash;        将下划线转换成驼峰命名&ndash;&gt;-->
+<!--        <setting name="mapUnderscoreToCamelCase" value="true"/>-->
+<!--        <setting name="autoMappingBehavior" value="NONE"/>-->
+        <!-- 开启延迟加载 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 设置加载的数据是按需还是全部 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+
     </settings>
     <typeAliases>
 <!--        <typeAlias type="com.cebbank.liuxiaoming.mybatis.entity.Employee" alias="emp"/>-->
@@ -29,6 +35,9 @@
     <mappers>
         <!-- 引入sql映射文件 -->
 <!--        <mapper resource="EmployeeMapper.xml"/>-->
-        <mapper class="com.cebbank.liuxiaoming.mybatis.dao.EmployeeMapper"/>
+<!--        <mapper class="com.cebbank.liuxiaoming.mybatis.dao.EmployeeMapper"/>-->
+        <mapper class="com.cebbank.liuxiaoming.mybatis.mapper.EmployeeMapper"/>
+        <mapper class="com.cebbank.liuxiaoming.mybatis.mapper.DepartmentMapper"/>
+
     </mappers>
 </configuration>

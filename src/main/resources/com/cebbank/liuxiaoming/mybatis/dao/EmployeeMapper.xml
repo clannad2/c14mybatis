@@ -35,4 +35,9 @@
     <select id="queryEmpByPojo" resultType="Employee">
         select * from employee where last_name=#{lastName} and email = #{email}
     </select>
+
+<!--    public Map<Integer,Employee> gueryEmpByMap();-->
+    <select id="queryEmpByMap" resultType="Employee">
+        select * from employee;
+    </select>
 </mapper>

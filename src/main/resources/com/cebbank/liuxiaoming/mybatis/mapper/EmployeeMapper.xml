@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=“接口的全类名”  -->
+<mapper namespace="com.cebbank.liuxiaoming.mybatis.mapper.EmployeeMapper">
+
+    <!-- 手动映射 -->
+    <resultMap type="Employee" id="queryAllResultMap">
+        <!-- 指定列和属性的关系
+           id 标签:主键列
+         -->
+        <id column="employId" property="employId"/>
+        <result column="last_name" property="lastName"/>
+        <result column="email" property="email"/>
+        <!-- 性别  gender -->
+    </resultMap>
+
+    <!--resultType 自动映射 -->
+    <select id="queryAll" resultMap="queryAllResultMap">
+      select * from employee
+  </select>
+    <!-- 手动映射 -->
+    <resultMap type="Employee" id="queryEmpByIdResultMap">
+        <!-- 指定列和属性的关系
+           id 标签:主键列
+         -->
+        <id column="employId" property="employId"/>
+        <result column="last_name" property="lastName"/>
+        <result column="email" property="email"/>
+        <result column="gender" property="gender"/>
+<!--        级联属性-->
+       <result column="departId" property="dept.departId"/>
+        <result column="departName" property="dept.departName"/>
+    </resultMap>
+    <select id="queryEmpById" resultMap="queryEmpByIdResultMap">
+        select emp.*,dept.* from employee emp,department dept where emp.departId=dept.departId and emp.employId=#{employID}
+    </select>
+
+    <resultMap type="Employee" id="queryEmpByIdStepResultMap">
+        <!-- 指定列和属性的关系
+           id 标签:主键列
+         -->
+        <id column="employId" property="employId"/>
+        <result column="last_name" property="lastName"/>
+        <result column="email" property="email"/>
+        <result column="gender" property="gender"/>
+        <association property="dept" select="com.cebbank.liuxiaoming.mybatis.mapper.DepartmentMapper.queryDeptByDid" column="departId"/>
+    </resultMap>
+    <select id="queryEmpByIdStep" resultMap="queryEmpByIdStepResultMap">
+        select * from employee where employId=#{employId}
+    </select>
+
+</mapper>

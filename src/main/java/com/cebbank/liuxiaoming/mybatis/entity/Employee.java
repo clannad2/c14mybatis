@@ -5,15 +5,21 @@ public class Employee {
     private String lastName;
     private String email;
     private Integer gender;
+    private Department dept;
 
     public Employee() {
     }
 
-    public Employee(Integer employId, String lastName, String email, Integer gender) {
+    public Employee(Integer employId, String lastName, String email, Integer gender, Department dept) {
         this.employId = employId;
         this.lastName = lastName;
         this.email = email;
         this.gender = gender;
+        this.dept = dept;
+    }
+
+    public Department getDept() {
+        return dept;
     }
 
     public Integer getEmployId() {
@@ -36,6 +42,10 @@ public class Employee {
         this.employId = employId;
     }
 
+    public void setDept(Department dept) {
+        this.dept = dept;
+    }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -51,10 +61,11 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "id=" + employId +
-                ", last_name='" + lastName + '\'' +
+                "employId=" + employId +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", gender=" + gender +
+                ", dept=" + dept +
                 '}';
     }
 }

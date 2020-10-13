@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=“接口的全类名”  -->
+<mapper namespace="com.cebbank.liuxiaoming.mybatis.mapper.DepartmentMapper">
+    <select id="queryDeptByDid" resultType="Department">
+        select * from department where departId=#{departId }
+    </select>
+
+    <resultMap id="queryDeptByDidCollectionResultMap" type="Department">
+        <id column="departId" property="departId"/>
+        <result column="departName" property="departName"/>
+        <collection property="employees" ofType="Employee">
+            <id column="employId" property="employId"/>
+            <result column="last_name" property="lastName"/>
+            <result column="email" property="email"/>
+            <result column="gender" property="gender"/>
+        </collection>
+
+    </resultMap>
+
+    <select id="queryDeptByDidCollection" resultMap="queryDeptByDidCollectionResultMap">
+        select dept.*,emp.*
+        from department dept,employee emp
+        where dept.departId=emp.departId
+        and dept.departId=#{departId}
+    </select>
+</mapper>
