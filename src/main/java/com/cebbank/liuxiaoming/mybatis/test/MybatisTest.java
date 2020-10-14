@@ -1,7 +1,7 @@
 package com.cebbank.liuxiaoming.mybatis.test;
 
-import com.cebbank.liuxiaoming.mybatis.entity.Department;
-import com.cebbank.liuxiaoming.mybatis.mapper.DepartmentMapper;
+import com.cebbank.liuxiaoming.mybatis.entity.Employee;
+import com.cebbank.liuxiaoming.mybatis.mapper.EmployeeMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MybatisTest {
     private static SqlSessionFactory factory;
@@ -32,14 +34,21 @@ public class MybatisTest {
 
         SqlSession sqlSession = factory.openSession();
 
-        DepartmentMapper mapper = sqlSession.getMapper(DepartmentMapper.class);
+        EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+        List<Integer> ids = new ArrayList<>();
+        ids.add(1);
+        ids.add(2);
+        ids.add(3);
+        ids.add(9);
+        List<Employee> employees = mapper.queryEmpByIds(ids);
+        System.out.println(employees);
 //        Employee employee = mapper.queryEmpByIdStep(1);
 //        System.out.println(employee.getEmail() );
 //        System.out.println(employee.getDept().getDepartName());
 //        List<Employee> employees = mapper.queryAll();
 //        System.out.println(employees);
-        Department department = mapper.queryDeptByDidCollection(1);
-        System.out.println(department);
+//        Department department = mapper.queryDeptByDidCollection(1);
+//        System.out.println(department);
         sqlSession.commit();
     }
 

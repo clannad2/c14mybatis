@@ -2,7 +2,9 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace=“接口的全类名”  -->
 <mapper namespace="com.cebbank.liuxiaoming.mybatis.mapper.EmployeeMapper">
-
+    <sql id="commonsql">
+        select * from employee
+    </sql>
     <!-- 手动映射 -->
     <resultMap type="Employee" id="queryAllResultMap">
         <!-- 指定列和属性的关系
@@ -47,6 +49,23 @@
     </resultMap>
     <select id="queryEmpByIdStep" resultMap="queryEmpByIdStepResultMap">
         select * from employee where employId=#{employId}
+
     </select>
 
+    <select id="queryEmpByIds" resultType="Employee">
+       <include refid="commonsql"></include> 
+        where employId in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+<!--    <select id="queryEmpByIds" resultType="Employee">-->
+<!--        select * from employee-->
+<!--        <trim prefix="where id in (" suffixOverrides="," suffix=")">-->
+<!--            <foreach collection="ids" item="id">-->
+<!--                #{id},-->
+<!--            </foreach>-->
+<!--        </trim>-->
+<!--    </select>-->
 </mapper>

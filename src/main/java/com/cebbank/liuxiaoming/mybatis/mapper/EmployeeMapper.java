@@ -1,6 +1,7 @@
 package com.cebbank.liuxiaoming.mybatis.mapper;
 
 import com.cebbank.liuxiaoming.mybatis.entity.Employee;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,4 +16,10 @@ public interface EmployeeMapper {
     public Employee queryEmpById(Integer empId);
     public Employee queryEmpByIdStep(Integer empId);
 
+    /**
+     *
+     * @param ids
+     * @return
+     */
+    public List<Employee> queryEmpByIds(@Param("ids") List<Integer> ids);
 }
